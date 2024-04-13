@@ -1,0 +1,97 @@
+#!/bin/bash
+
+# API key for OpenWeatherMap
+API_KEY="6c144abb679cf60495bd851a091d9833"
+
+# Function to fetch city suggestions based on partial user input
+fetch_city_suggestions() {
+    local partial_city_query="$1"
+    local city_suggestions=$(curl -s "http://api.openweathermap.org/data/2.5/find?q=${partial_city_query}&appid=${API_KEY}" | jq -r '.list[] | .name + ", " + .sys.country')
+    echo "$city_suggestions"
+}
+
+# Function to display city suggestions
+display_city_suggestions() {
+    local suggestions="$1"
+    echo "Suggestions: $suggestions"
+}
+
+# Function to fetch current weather conditions for a given city
+fetch_weather() {
+    local city_name="$1"
+    local city_weather=$(curl -s "http://api.openweathermap.org/data/2.5/weather?q=${city_name}&appid=${API_KEY}&units=metric")
+
+    if [ "$(echo "$city_weather" | jq -r '.cod')" == "404" ]; then
+        echo "City not found. Please try again."
+    else
+        # Extracting weather details
+        local weather_description=$(echo "$city_weather" | jq -r '.weather[0].description')
+        local temperature=$(echo "$city_weather" | jq -r '.main.temp')
+        local feels_like=$(echo "$city_weather" | jq -r '.main.feels_like')
+        local temp_min=$(echo "$city_weather" | jq -r '.main.temp_min')
+        local temp_max=$(echo "$city_weather" | jq -r '.main.temp_max')
+        local pressure=$(echo "$city_weather" | jq -r '.main.pressure')
+        local humidity=$(echo "$city_weather" | jq -r '.main.humidity')
+        local visibility=$(echo "$city_weather" | jq -r '.visibility')
+        local wind_speed=$(echo "$city_weather" | jq -r '.wind.speed')
+        local wind_deg=$(echo "$city_weather" | jq -r '.wind.deg')
+        local clouds=$(echo "$city_weather" | jq -r '.clouds.all')
+        local sunrise=$(echo "$city_weather" | jq -r '.sys.sunrise')
+        local sunset=$(echo "$city_weather" | jq -r '.sys.sunset')
+        local timezone=$(echo "$city_weather" | jq -r '.timezone')
+        local dt=$(echo "$city_weather" | jq -r '.dt')
+        local name=$(echo "$city_weather" | jq -r '.name')
+        local country=$(echo "$city_weather" | jq -r '.sys.country')
+
+        # Converting Unix timestamps to readable format
+        sunrise=$(date -d @"$sunrise" +'%Y-%m-%d %H:%M:%S')
+        sunset=$(date -d @"$sunset" +'%Y-%m-%d %H:%M:%S')
+        dt=$(date -d @"$dt" +'%Y-%m-%d %H:%M:%S')
+
+        # Displaying weather information
+        echo "Weather Information for $name, $country:"
+        echo "Weather Description: $weather_description"
+        echo "Temperature: $temperature°C"
+        echo "Feels Like: $feels_like°C"
+        echo "Minimum Temperature: $temp_min°C"
+        echo "Maximum Temperature: $temp_max°C"
+        echo "Pressure: $pressure hPa"
+        echo "Humidity: $humidity%"
+        echo "Visibility: $visibility meters"
+        echo "Wind Speed: $wind_speed m/s"
+        echo "Wind Degree: $wind_deg°"
+        echo "Cloudiness: $clouds%"
+        echo "Sunrise: $sunrise (Local Time)"
+        echo "Sunset: $sunset (Local Time)"
+        echo "Timezone: $timezone seconds"
+        echo "Data Time: $dt (Local Time)"
+    fi
+}
+
+# Main script
+while true; do
+    read -p "Enter city name: " input_city
+
+    # Fetch suggestions based on partial user input
+    city_suggestions=$(fetch_city_suggestions "$input_city")
+
+    if [ -z "$city_suggestions" ]; then
+        echo "No suggestions found for \"$input_city\". Please enter a valid city name."
+    else
+        display_city_suggestions "$city_suggestions"
+
+        # Prompt user to select a city from suggestions
+        read -e -p "Enter city name from the suggestions above: " -i "$input_city" selected_city
+
+        # Prompt user to choose a country code from the suggestions
+        read -p "Enter country code from the suggestions above: " country_code
+
+        # Concatenate city name and country code
+        selected_city="${selected_city%%,*}"  # Remove everything after the comma
+        selected_city="${selected_city},$country_code"
+
+        # Fetch weather for the selected city
+        fetch_weather "$selected_city"
+        break
+    fi
+done

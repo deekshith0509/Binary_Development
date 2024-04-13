@@ -1,0 +1,61 @@
+#!/bin/bash
+
+# Function to encrypt a file
+encrypt_file() {
+    if [ $# -ne 2 ]; then
+        echo "Usage: $0 encrypt <input_file> <output_file>"
+        exit 1
+    fi
+
+    input_file=$1
+    output_file=$2
+
+    # Prompt for password
+    read -sp "Enter encryption password: " password
+    echo
+
+    # Encrypt the file
+    openssl enc -aes-256-cbc -salt -in "$input_file" -out "$output_file" -pass "pass:$password"
+
+    echo "File encrypted successfully!"
+}
+
+# Function to decrypt a file
+decrypt_file() {
+    if [ $# -ne 2 ]; then
+        echo "Usage: $0 decrypt <input_file> <output_file>"
+        exit 1
+    fi
+
+    input_file=$1
+    output_file=$2
+
+    # Prompt for password
+    read -sp "Enter decryption password: " password
+    echo
+
+    # Decrypt the file
+    openssl enc -d -aes-256-cbc -in "$input_file" -out "$output_file" -pass "pass:$password"
+
+    echo "File decrypted successfully!"
+}
+
+# Main script
+if [ $# -lt 3 ]; then
+    echo "Usage: $0 <encrypt/decrypt> <input_file> <output_file>"
+    exit 1
+fi
+
+case "$1" in
+    encrypt)
+        encrypt_file "$2" "$3"
+        ;;
+    decrypt)
+        decrypt_file "$2" "$3"
+        ;;
+    *)
+        echo "Invalid option: $1"
+        echo "Usage: $0 <encrypt/decrypt> <input_file> <output_file>"
+        exit 1
+        ;;
+esac
