@@ -1,21 +1,19 @@
-#This Repository (Bash-Scripts) includes wide range of bash scripts.Some of them are made using the Rest-API.                                                        
 
- 
- THESE BINARIES CAN BE USED IN TERMUX(an android emulator) by exporting path.
+# Bash Scripting
 
- paste .bashrc file into the home directory of the TERMUX.
+This repository includes various miscellaneous bash(UNIX) based shell Scripts.
 
-#!/bin/bash
+## Acknowledgements
 
-echo "        ___ ___  _ __ ___  _ __ ___   __ _ _ __   __| |___"
-echo "       / __/ _ \| '_ \` _ \| '_ \` _ \ / _\` | '_ \ / _\` / __|"
-echo "      | (_| (_) | | | | | | | | | | | | (_| | | | | (_| \__ \\"
-echo "       \___\___/|_| |_| |_|_| |_| |_|\__,_|_| |_|\__,_|___/"
+ - [Termux](https://f-droid.org/en/packages/com.termux/)
+ - [check my other Repos](https://github.com/deekshith0509/)
 
 
+## Deployment
 
-COMMANDS:
+To deploy this project run
 
- echo 'export PATH="$PATH:$HOME/bin"' >> ~/.bashrc
+```bash
+  echo 'export PATH="$PATH:$HOME/bin"' >> ~/.bashrc
 
- mv .bashrc /data/data/com.termux/files/home/.bashrc
+  mv .bashrc /data/data/com.termux/files/home/.bashrc
