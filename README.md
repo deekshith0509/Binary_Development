@@ -80,12 +80,12 @@ To use the provided shell scripts:
 ##### Make the script executable:
 
 ```sh
-     chmod +x script.sh
+chmod +x script.sh
 ```
 ### Run the script:
 
 ```sh
-    ./script.sh
+./script.sh
 ```
 ## Contributing
 
@@ -99,7 +99,6 @@ For questions or feedback, please contact deekshith.bh0509@gmail.com.
 
 This formatting ensures that code blocks are properly displayed and the commands are easily distinguishable. Feel free to adjust the content as needed for your specific project!
 
-=======
 # Bash Scripting
 
 This repository includes various miscellaneous bash(UNIX) based shell Scripts.
