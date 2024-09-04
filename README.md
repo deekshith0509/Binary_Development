@@ -1,5 +1,3 @@
-
-<<<<<<< HEAD
 # Binaries Development Repository
 
 Welcome to the Binaries Development Repository! This repository contains various tools and scripts used for creating binaries from shell scripts and Python code using SHC, PyInstaller, Nuitka, and more.
@@ -117,7 +115,8 @@ This repository includes various miscellaneous bash(UNIX) based shell Scripts.
 To deploy this project run
 
 ```bash
-  echo 'export PATH="$PATH:$HOME/bin"' >> ~/.bashrc
+echo 'export PATH="$PATH:$HOME/bin"' >> ~/.bashrc
 
-  mv .bashrc /data/data/com.termux/files/home/.bashrc
->>>>>>> main
+mv .bashrc /data/data/com.termux/files/home/.bashrc
+
+```
