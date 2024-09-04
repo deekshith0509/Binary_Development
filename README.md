@@ -1,4 +1,5 @@
 
+<<<<<<< HEAD
 # Binaries Development Repository
 
 Welcome to the Binaries Development Repository! This repository contains various tools and scripts used for creating binaries from shell scripts and Python code using SHC, PyInstaller, Nuitka, and more.
@@ -100,3 +101,23 @@ For questions or feedback, please contact deekshith.bh0509@gmail.com.
 
 This formatting ensures that code blocks are properly displayed and the commands are easily distinguishable. Feel free to adjust the content as needed for your specific project!
 
+=======
+# Bash Scripting
+
+This repository includes various miscellaneous bash(UNIX) based shell Scripts.
+
+## Acknowledgements
+
+ - [Termux](https://f-droid.org/en/packages/com.termux/)
+ - [check my other Repos](https://github.com/deekshith0509/)
+
+
+## Deployment
+
+To deploy this project run
+
+```bash
+  echo 'export PATH="$PATH:$HOME/bin"' >> ~/.bashrc
+
+  mv .bashrc /data/data/com.termux/files/home/.bashrc
+>>>>>>> main
