@@ -115,7 +115,6 @@ To deploy this project run
 
 ```bash
 echo 'export PATH="$PATH:$HOME/bin"' >> ~/.bashrc
-
 mv .bashrc /data/data/com.termux/files/home/.bashrc
 
 ```
