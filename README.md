@@ -5,7 +5,7 @@ Welcome to the Binaries Development Repository! This repository contains various
 
 ## Introduction
 
-This repository provides resources and tools to compile and package shell scripts and Python scripts into standalone binaries. This can be useful for deploying scripts in environments where dependencies need to be minimized or for distributing tools to users who may not have the required runtime environments installed.
+This repository provides resources and tools to compile (third-party) and package shell scripts and Python scripts into standalone binaries. This can be useful for deploying scripts in environments where dependencies need to be minimized or for distributing tools to users who may not have the required runtime environments installed.
 
 ## SHC
 
